@@ -4,7 +4,9 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
-## In progress — building toward the next release
+## v1.3.0 — 2026-07-13
+
+**Real 3D building models.** The first hand-placed 3D building prop — a mushroom hut — is now in the game: drop it into 3D view and rotate/scale it like any other decal. It's the first asset through a new art pipeline for turning custom multi-view artwork into compact, game-ready 3D models, so more of these are coming. Also fixed a real bug in the process: decal placement didn't actually work in 3D view at all before this (in or out of decal mode, it just painted terrain instead) — now it does, with the same rotate/scale controls the 2D canvas already had.
 
 **Water rendering, rebuilt from the ground up.** The old model had pinched, shallow-looking edges everywhere. Now there's a real depth model: one flat sea level per connected water body (computed via flood fill, not once for the whole map), with the seabed sinking beneath it the further out it goes — matches how a real coastline actually looks. Two unconnected ponds in the same area can sit at different heights, and water lines up correctly across chunk boundaries instead of stair-stepping.
 
