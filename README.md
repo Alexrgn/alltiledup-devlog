@@ -4,7 +4,22 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
-            
+## v1.4.0 — 2026-07-17
+
+**Terrain generation, rebuilt.** Randomize and Generate used to quantize a single noise field into height bands and hope the result looked like a map. Now terrain is built from real, distinct landforms — mountains that scale as an actual tapering peak (not a spike), carved canyons, and water basins placed clear of the mountains so lakes and cliffs never fight for the same ground — with open, walkable field left between features for paths to run through. Materials follow real elevation order too: shore, ground, vegetation, foothill rock, then peak, instead of whatever happened to land in a band. Give a layer a role (Floor, Rock, Peak, etc.) and Randomize, Generate, and World Drift all respect it now — not just World Drift like before.
+
+**Fixed ISO and 3D losing painted terrain on format switch.** Switching a multi-terrain map (Blob, Wang, etc.) to ISO — or viewing it in 3D — could flatten every elevation band down to whichever single material happened to be selected, instead of showing the actual band-assigned materials. Both views now correctly inherit the real terrain.
+
+**Path tool now has its own material picker.** Every path on the map used to render as the same hardcoded material no matter what you painted with. Now you pick the material the path tool paints with directly, and each stretch of path keeps whatever material it was painted with — changing the picker mid-map never rewrites path you already laid down.
+
+**Puddle format lag, fixed.** Every material's blob was being fully rebuilt — full-map canvas, blur, per-pixel noise — on every redraw, including ticks that had nothing to do with Puddle at all (like the water animation). Now it's cached and only rebuilt when something actually changes.
+
+**Toolbox reworked.** It's now a straightforward list of every toolbar tool — click one to show or hide it without it jumping out of the list, drag its handle if you want it placed at an exact spot. Randomize also moved out of the World dropdown and onto the toolbar itself.
+
+**Hindi, Bengali, and Marathi added,** reaching full localization for three of India's most-spoken languages.
+
+---
+
   ## v1.3.0 - Water Physics Update - 2026-07-17      
                                                      
   **Water now behaves like an actual liquid.** Water 
