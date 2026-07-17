@@ -4,7 +4,43 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
-## v1.3.0 — 2026-07-13
+            
+  ## v1.3.0 - Water Physics Update - 2026-07-17      
+                                                     
+  **Water now behaves like an actual liquid.** Water 
+  placed in height-map worlds flows into nearby      
+  basins and fills enclosed spaces up to their lowest
+  retaining wall. Break a wall and the water drains  
+  into the newly opened area while conserving its    
+  volume. Connect two pools and they equalize at one 
+  shared surface instead of remaining at conflicting 
+  heights.                                           
+                                                     
+  **New Sponge tool.** The Sponge removes water      
+  inside the brush area without damaging terrain,    
+  changing materials, or deleting decals.            
+                                                     
+  **3D water was rebuilt for the new behavior.**     
+  Water edges now meet the terrain without gaps,     
+  clipping, or z-fighting. Waves respond to water    
+  depth, remain below retaining walls, and follow the
+  selected flow direction. Painting in 3D can also   
+  stack terrain repeatedly instead of raising a cell 
+  only once per session.                             
+                                                     
+  **World generation and stability fixes.** Generated
+  roads now route around buildings, and settlement   
+  metadata correctly matches the structures shown on 
+  the map. Long painting sessions no longer leak 3D  
+  billboard materials into GPU memory.               
+                                                     
+  **Safer imports and desktop builds.** Custom-      
+  material imports now enforce a 25 MB per-file limit
+  and report failures honestly. External desktop     
+  the desktop runtime has been upgraded to Electron  
+  43.
+
+ ## v1.3.0 — 2026-07-13
 
 **Real 3D building models.** The first hand-placed 3D building prop — a mushroom hut — is now in the game: drop it into 3D view, then pick it up and drag it wherever you want, or rotate/scale it, like any other decal. It's the first asset through a new art pipeline for turning custom multi-view artwork into compact, game-ready 3D models, so more of these are coming. Also fixed a couple of real bugs in the process: decal placement didn't actually work in 3D view at all before this (in or out of decal mode, it just painted terrain instead), and adjusting a decal's rotation or size with the scroll wheel was quietly zooming the camera at the same time. Both now behave like their 2D counterparts.
 
