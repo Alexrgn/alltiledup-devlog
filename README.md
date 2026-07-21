@@ -4,6 +4,24 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
+## v1.5.0 — 2026-07-21
+
+**Platformer levels can now have real hazards and moving parts.** A new level-entity system adds moving platforms (ping-pong back and forth on whichever axis and distance you set, rendered as a real one-way ledge you can ride), hand-drawn spike strips, and breakable blocks with their own crack patterns — all riding through save/load, undo, and chunk baking like everything else, plus a generic JSON export for scripting them into your own engine. The test sprite rides platforms properly (no tunnelling through on a fast fall), dies on spikes, and breaks blocks bumped from below. Decals can now ride along on top of a moving platform too, instead of floating in place while it moves out from under them.
+
+**Parallax backdrops.** Import your own image, stack multiple layers with independent scroll speed (locked to the screen, or moving with the world) and tiling, and it renders behind the level with the sky left transparent. A new spawn point (auto-placed by Generate, or set by hand) marks exactly where test-play starts, and platformer levels can now generate a ceiling with climbable ladder-islands instead of always being open-air.
+
+**Cross-chunk platformer generation.** Adjacent chunks now generate floors, ceiling openings, and drop-through pits that actually line up at the seam in all four directions, instead of every chunk being generated in isolation.
+
+**Hex format grew into a full hexcrawl toolkit.** Coordinate labels, a curated point-of-interest picker (village, watchtower, ruins, portal, and more), GM fog-of-war with a separate reveal-only view for a second-screen Present mode, and rivers/roads that route along hex edges and centers with organic wobble. Also new: Dorfomantik-style edge tiles (paint a material onto a specific hex edge, auto-mirrored onto the shared neighbor, with a mismatch checker and its own tile-set export), and a Layered hex mode that renders elevation as real extruded, shaded stacked tiers instead of flat color bands.
+
+**Test-play, actually playable on your phone.** New on-screen touch controls — a D-pad and jump button, both resizable and repositionable — drive test-play using the same input the keyboard already does, including double-tap-and-hold to run and down+jump to drop through a one-way platform. Getting this working on a real device surfaced (and fixed) a run of real bugs: test-play's toggle button was accidentally dev-only and never actually reachable in any real build; a 2-finger pinch or pan could race against placing an entity or decal and place one by accident; tapping an existing moving platform now opens its settings instead of stacking a new one on top; and an Android-specific bug where hiding UI during test-play could permanently shrink the rendered viewport for the rest of that session. Also added a speed slider for test-play (separate from zoom), and widened the touch/pinch-recognition window after live testing showed a real pinch gesture needs more room than a synthetic one to be told apart from a paint stroke.
+
+**Export correctness pass.** LDtk export was rewritten against the real 1.5.3 schema (the old one was fundamentally broken); Godot export fixed hex tile sizing and a missing collision layer; Dorfomantik export fixed material and orientation bugs; and Universal VTT export now correctly refuses to run on formats it was never built for (iso/hex) instead of producing a broken file.
+
+**Rendering & performance pass** across platformer, hex, iso, and 3D — including lift-aware picking (clicking a tall stack's raised face now resolves to that cell, not whatever flat cell happens to be underneath), eased wheel-zoom, and backdrop layers you can reorder, reposition, resize, and rotate in place.
+
+---
+
 ## v1.4.0 — 2026-07-17
 
 **Terrain generation, rebuilt.** Randomize and Generate used to quantize a single noise field into height bands and hope the result looked like a map. Now terrain is built from real, distinct landforms — mountains that scale as an actual tapering peak (not a spike), carved canyons, and water basins placed clear of the mountains so lakes and cliffs never fight for the same ground — with open, walkable field left between features for paths to run through. Materials follow real elevation order too: shore, ground, vegetation, foothill rock, then peak, instead of whatever happened to land in a band. Give a layer a role (Floor, Rock, Peak, etc.) and Randomize, Generate, and World Drift all respect it now — not just World Drift like before.
