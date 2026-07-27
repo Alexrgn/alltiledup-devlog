@@ -4,6 +4,22 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
+## v1.6.0 — 2026-07-26
+
+**A big decal-identity pass.** Continuing the same "give it a real structural signature instead of a recolored clone" work the textures got last round, this time on over 30 small decal/prop shapes — acorns, beetles, bells, berries, bolts, soap bubbles, bullet holes, charcoal, coins, crystals, dents, embers, eyes, fairy rings, flint, fossils, gears, gems, glyphs, lichen, lilies, mushrooms, nails, portal rifts, potion stains, rings, scrap, shards, skulls, stars, and sticks. Each one now varies its actual silhouette per stamp instead of just repositioning the same shape — the soap bubble, for one example, went from a static circle with two fixed highlight dots to per-instance wobble, refraction shading, and a real iridescent thin-film ring. The grass/moss material family (jungle floor, fungal mat, autumn grass, bamboo grove, sea grass, winter grass, meadow grass, flowering meadow, mossy rock, and more) went through the same treatment, and the Conveyor Belt material was fixed to actually respond to its frequency and seed dials instead of rendering the same shape regardless of what they're set to.
+
+**Hex and Tiled export fix.** Tiled's TSX export was slicing every isometric tile in half — it was sizing tiles off the map's grid footprint instead of the actual atlas cell size. Hex maps also had their Tiled "stagger axis" backwards: pointy-top and flat-top were swapped from what Tiled's own convention expects. Both fixed, with new automated coverage so they can't quietly regress again.
+
+**Decals in isometric maps were silently invisible.** Not a rendering glitch — decals were being placed and saved into the map correctly, they just never got painted, for as long as iso decal stamping has existed. The iso render path calls its own terrain function and returns before ever reaching the decal-paint step meant to run afterward. Fixed by moving decal painting into the function iso actually renders through.
+
+**Materials hotfix.** Six materials (Mortar, Noir Cobble, Tundra Gravel, Mosaic Tile, Crumbled Mosaic, a Dirt Dry Dusty gravel variant) crashed the materials panel outright — leftover references from a mid-refactor. Two more (Baked Clay, Dirt Dry Dusty) rendered as flat solid black instead of erroring, from a bug that silently turned a coordinate into "not a number" rather than failing loudly. All fixed and checked against every material in the library.
+
+**Smaller stuff:** the chunk map panel gained a delete-current-chunk button; the PATH tool's toolbar button was mislabeled "RAMP" since ramps got folded into it as automatic behavior — renamed, and Generate now actually respects the material you pick for it instead of randomizing; a real fullscreen toggle, a clear-map action, seamless tile export, and Tiled (.tmx) world export were added to Paint; Platformer levels can use imported parallax backdrop images out of the box.
+
+**In progress, not shipped yet:** a real voxel block-world format is taking shape behind the scenes — chunked storage, a hidden-face-culling mesher, and a read-only 3D test view. Early and not exposed in the released app, but it's the foundation for true 3D block editing down the line.
+
+---
+
 ## v1.5.0 — 2026-07-21
 
 **Platformer levels can now have real hazards and moving parts.** A new level-entity system adds moving platforms (ping-pong back and forth on whichever axis and distance you set, rendered as a real one-way ledge you can ride), hand-drawn spike strips, and breakable blocks with their own crack patterns — all riding through save/load, undo, and chunk baking like everything else, plus a generic JSON export for scripting them into your own engine. The test sprite rides platforms properly (no tunnelling through on a fast fall), dies on spikes, and breaks blocks bumped from below. Decals can now ride along on top of a moving platform too, instead of floating in place while it moves out from under them.
