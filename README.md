@@ -4,6 +4,22 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
+## v1.7.0 — 2026-09-14 — Voxel is in
+
+**The voxel editor is no longer a hidden experiment.** It ships as a first-class block world you can paint, simulate, and (on Pro) export. 64×32×64 bounds, chunked meshing with hidden-face culling, orbit camera, four save slots, stamps, selection masks, copy/rotate/scale/randomize, a command palette, and inspect popups that close the same way they open. Deselecting is as easy as selecting. Right-click inspect no longer opens the browser context menu, and a camera drag no longer counts as an inspect.
+
+**Water is a real liquid, not a pile of blue cubes.** Infinite sources keep feeding. Water falls off ledges as a continuous waterfall sheet instead of dripping rectangles. Gravity first, then lateral spread. Drop something in and you get mist. Fire has a real lifetime plus Eternal / Pause / Stoke / Extinguish / Douse. Explosions throw micro-voxels. Dynamic rigid bodies can be selected, dragged, placed, copied, and actually stop floating after Reset Map.
+
+**Paint ISO and voxel talk to each other.** Terrain Bands assign a texture per height; isometric tiles use those textures on tops and stacked cliff slices. Extrude an ISO map into voxel and the waterfall still looks like a waterfall. Band lists scroll. The paint HUD no longer stacks the toolbar, terrain panel, inspector, and hotbar on top of each other. Optional Basic UI names every tool; Experienced stays icon-only.
+
+**Voxel texture resolution is a real control** — 16 / 32 / 64 / 128. Grid visibility is a toggle, not a guess. Phones get a GPU budget (lower pixel ratio, fewer grass blades, coalesced remesh) so the editor stays playable instead of hitching on first tool activation.
+
+**What stays gated:** exports. The editor — including voxel, ISO, fire, water, and physics — is the full tool. Pro is the door out: engine-ready files, atlases, and packs. The itch HTML5 build is the demo (exports locked). The itch desktop download and Play build are the paid packages.
+
+**Also in this drop:** ISO chunks no longer clip tall stacks; stamps actually place; before/after compare can be dismissed; Dev HUD toggles off.
+
+---
+
 ## v1.6.0 — 2026-07-26
 
 **A big decal-identity pass.** Continuing the same "give it a real structural signature instead of a recolored clone" work the textures got last round, this time on over 30 small decal/prop shapes — acorns, beetles, bells, berries, bolts, soap bubbles, bullet holes, charcoal, coins, crystals, dents, embers, eyes, fairy rings, flint, fossils, gears, gems, glyphs, lichen, lilies, mushrooms, nails, portal rifts, potion stains, rings, scrap, shards, skulls, stars, and sticks. Each one now varies its actual silhouette per stamp instead of just repositioning the same shape — the soap bubble, for one example, went from a static circle with two fixed highlight dots to per-instance wobble, refraction shading, and a real iridescent thin-film ring. The grass/moss material family (jungle floor, fungal mat, autumn grass, bamboo grove, sea grass, winter grass, meadow grass, flowering meadow, mossy rock, and more) went through the same treatment, and the Conveyor Belt material was fixed to actually respond to its frequency and seed dials instead of rendering the same shape regardless of what they're set to.
