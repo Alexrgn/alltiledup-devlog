@@ -4,6 +4,24 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
+## v1.8.0 — 2026-09-19 — Magica coast & 2.5D walls
+
+**Compared to v1.7.0:** the voxel sandbox stopped looking like a block prototype and started looking like a MagicaVoxel diorama you can actually live in and edit.
+
+**Micro-props at Magica scale.** Dock planks, pilings, cleats, ladders, bait buckets, wells, barrels, signs, cottage framing, glowing windows, chimney smoke, mill vanes, clothesline, carts, beach fires, cave mouths with stalactites/chests/flicker lamps, tide pools, lily pads, crabs, fish, boat wakes, circling gulls, wet sand, shoreline foam, and a dinghy that finally sits on the water with a fisherman on the pier — not through it. Props place as stamps (undo / click-erase / drag-erase), persist with the map, and export at object scale. Engine export no longer nukes live meshes.
+
+**The island reads as a place.** West lighthouse with stairs and beam, walkable cliff caves, cliff waterfalls, Magica teal water with waves, denser coast trees and shallows rocks, cobble lips on terrace drops, spinning mill smoke, Magica AO/sky/fill light. Poured water is an infinite source again; chimney fire stays in the chimney.
+
+**Paint / 2.5D caught up.** Real 16-piece wall tileset, per-cell deco, castle buildings with connecting walls, optional doors in wall gaps, stamps that stack on tiles, HD stamp palette, FAM tiles from cached seed-family variants, format dropdown + dockable HUD + rail stamps. Hover cursor no longer paints orange junk. Phone HUD got a two-thumb sequential tool layout.
+
+**Performance & crash guards.** Greedy top/bottom meshing and budgeted remesh on voxel enter, packed greedy micro mesher, typed-array flatten, frozen shadow maps between edits, one point light per lamp cluster, skip micro AO / pause when the tab is hidden, freeze static matrices, strip mobile fill/fog/hemi, and paint's material-tile cache so zoom/format reuse 256px tiles. White-screen / remesh / TransformControls / export crash paths hardened.
+
+**Also fixed:** light mode for chrome/canvas/settings; CanvasCloth/Bark/Hemp ARCH keys; mismatched procedural substrates + Play motion; canvas sails / bark logs / straw thatch (not grass); inspect sliders + deselect restored.
+
+**Builds:** itch HTML5 demo (exports locked) + Windows desktop zip from `grokbranch`.
+
+---
+
 ## v1.7.0 — 2026-09-14 — Voxel is in
 
 **The voxel editor is no longer a hidden experiment.** It ships as a first-class block world you can paint, simulate, and (on Pro) export. 64×32×64 bounds, chunked meshing with hidden-face culling, orbit camera, four save slots, stamps, selection masks, copy/rotate/scale/randomize, a command palette, and inspect popups that close the same way they open. Deselecting is as easy as selecting. Right-click inspect no longer opens the browser context menu, and a camera drag no longer counts as an inspect.
