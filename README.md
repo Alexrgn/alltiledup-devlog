@@ -4,12 +4,6 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
-## 2026-09-21 — Itch Demo + Pro sync (redownload Pro)
-
-Demo and Pro Windows builds on itch had drifted out of sync; they are aligned again on the latest product code.
-
-**If you already purchased Pro:** please redownload the latest Windows build from the itch page and replace your install. The desktop itch build does **not** auto-update — in-app update checks are for the Play Store / Android build only.
-
 ## v1.9.0 — 2026-09-21 — Pro boundary and export hardening
 
 **Compared to v1.8.0:** this is a release-integrity pass rather than another feature drop. The editor remains open to everyone; Pro is now consistently the door out.
