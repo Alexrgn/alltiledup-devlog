@@ -12,9 +12,9 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 **Formats are clearer.** All tileset formats are visible in the picker, including Hex 64 and Iso Ground, with stale PRO labels and obsolete Dirt Path references removed. Free users can still use every format and preview; only exports and voxel mode are gated.
 
-**Release hardening.** Restored the production stylesheet/Vite configuration after a broken build-tail cleanup, and added a full export audit documenting the 34 export kinds and their gate coverage.
+**Release hardening.** Restored the production stylesheet and build configuration after a broken cleanup, and added a full export audit documenting the 34 export kinds and their gate coverage.
 
-**Build:** Android Play release bundle, versionCode 31, from `grokbranch`.
+**Build:** mobile release bundle, versionCode 31, from `grokbranch`.
 
 ---
 
@@ -30,9 +30,9 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 **Performance & crash guards.** Greedy top/bottom meshing and budgeted remesh on voxel enter, packed greedy micro mesher, typed-array flatten, frozen shadow maps between edits, one point light per lamp cluster, skip micro AO / pause when the tab is hidden, freeze static matrices, strip mobile fill/fog/hemi, and paint's material-tile cache so zoom/format reuse 256px tiles. White-screen / remesh / TransformControls / export crash paths hardened.
 
-**Also fixed:** light mode for chrome/canvas/settings; CanvasCloth/Bark/Hemp ARCH keys; mismatched procedural substrates + Play motion; canvas sails / bark logs / straw thatch (not grass); inspect sliders + deselect restored.
+**Also fixed:** light mode for chrome/canvas/settings; CanvasCloth/Bark/Hemp ARCH keys; mismatched procedural substrates + motion; canvas sails / bark logs / straw thatch (not grass); inspect sliders + deselect restored.
 
-**Builds:** itch HTML5 demo (exports locked) + Windows desktop zip from `grokbranch`.
+**Builds:** browser demo (exports locked) + desktop package from the active branch.
 
 ---
 
@@ -46,7 +46,7 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 **Voxel texture resolution is a real control** — 16 / 32 / 64 / 128. Grid visibility is a toggle, not a guess. Phones get a GPU budget (lower pixel ratio, fewer grass blades, coalesced remesh) so the editor stays playable instead of hitching on first tool activation.
 
-**What stays gated:** exports. The editor — including voxel, ISO, fire, water, and physics — is the full tool. Pro is the door out: engine-ready files, atlases, and packs. The itch HTML5 build is the demo (exports locked). The itch desktop download and Play build are the paid packages.
+**What stays gated:** exports. The editor — including voxel, ISO, fire, water, and physics — is the full tool. Pro is the door out: engine-ready files, atlases, and packs. The browser build is the demo (exports locked). The desktop and mobile packages are the paid builds.
 
 **Also in this drop:** ISO chunks no longer clip tall stacks; stamps actually place; before/after compare can be dismissed; Dev HUD toggles off.
 
@@ -76,13 +76,13 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 **Cross-chunk platformer generation.** Adjacent chunks now generate floors, ceiling openings, and drop-through pits that actually line up at the seam in all four directions, instead of every chunk being generated in isolation.
 
-**Hex format grew into a full hexcrawl toolkit.** Coordinate labels, a curated point-of-interest picker (village, watchtower, ruins, portal, and more), GM fog-of-war with a separate reveal-only view for a second-screen Present mode, and rivers/roads that route along hex edges and centers with organic wobble. Also new: Dorfomantik-style edge tiles (paint a material onto a specific hex edge, auto-mirrored onto the shared neighbor, with a mismatch checker and its own tile-set export), and a Layered hex mode that renders elevation as real extruded, shaded stacked tiers instead of flat color bands.
+**Hex format grew into a full hexcrawl toolkit.** Coordinate labels, a curated point-of-interest picker (village, watchtower, ruins, portal, and more), GM fog-of-war with a separate reveal-only view for a second-screen Present mode, and rivers/roads that route along hex edges and centers with organic wobble. Also new: edge tiles (paint a material onto a specific hex edge, auto-mirrored onto the shared neighbor, with a mismatch checker and its own tile-set export), and a Layered hex mode that renders elevation as real extruded, shaded stacked tiers instead of flat color bands.
 
-**Test-play, actually playable on your phone.** New on-screen touch controls — a D-pad and jump button, both resizable and repositionable — drive test-play using the same input the keyboard already does, including double-tap-and-hold to run and down+jump to drop through a one-way platform. Getting this working on a real device surfaced (and fixed) a run of real bugs: test-play's toggle button was accidentally dev-only and never actually reachable in any real build; a 2-finger pinch or pan could race against placing an entity or decal and place one by accident; tapping an existing moving platform now opens its settings instead of stacking a new one on top; an Android-specific bug where hiding UI during test-play could permanently shrink the rendered viewport for the rest of that session; the zoom slider could make the sprite (and camera) jump to a different spot on the map instead of staying anchored where it actually was; and middle-mouse-drag panning would snap right back to the sprite a moment after you let go of it instead of actually holding your new view. Also added a speed slider for test-play (separate from zoom), and widened the touch/pinch-recognition window after live testing showed a real pinch gesture needs more room than a synthetic one to be told apart from a paint stroke.
+**Test-play, actually playable on your phone.** New on-screen touch controls — a D-pad and jump button, both resizable and repositionable — drive test-play using the same input the keyboard already does, including double-tap-and-hold to run and down+jump to drop through a one-way platform. Getting this working on a real phone surfaced (and fixed) a run of real bugs: test-play's toggle button was accidentally dev-only and never actually reachable in any real build; a 2-finger pinch or pan could race against placing an entity or decal and place one by accident; tapping an existing moving platform now opens its settings instead of stacking a new one on top; a mobile bug where hiding UI during test-play could permanently shrink the rendered viewport for the rest of that session; the zoom slider could make the sprite (and camera) jump to a different spot on the map instead of staying anchored where it actually was; and middle-mouse-drag panning would snap right back to the sprite a moment after you let go of it instead of actually holding your new view. Also added a speed slider for test-play (separate from zoom), and widened the touch/pinch-recognition window after live testing showed a real pinch gesture needs more room than a synthetic one to be told apart from a paint stroke.
 
 **Generate no longer places two ramps meeting at a bare peak.** A flat, 2-cell-wide hilltop could get ramps sloping down from both sides with nothing flat left at the top — a knife-edge point instead of a walkable peak. Both Generate and manually painting a path over a height change now always leave a flat cell between two ramps that would otherwise meet.
 
-**Export correctness pass.** LDtk export was rewritten against the real 1.5.3 schema (the old one was fundamentally broken); Godot export fixed hex tile sizing and a missing collision layer; Dorfomantik export fixed material and orientation bugs; and Universal VTT export now correctly refuses to run on formats it was never built for (iso/hex) instead of producing a broken file.
+**Export correctness pass.** LDtk export was rewritten against the real 1.5.3 schema (the old one was fundamentally broken); Godot export fixed hex tile sizing and a missing collision layer; edge-tile export fixed material and orientation bugs; and Universal VTT export now correctly refuses to run on formats it was never built for (iso/hex) instead of producing a broken file.
 
 **Rendering & performance pass** across platformer, hex, iso, and 3D — including lift-aware picking (clicking a tall stack's raised face now resolves to that cell, not whatever flat cell happens to be underneath), eased wheel-zoom, and backdrop layers you can reorder, reposition, resize, and rotate in place.
 
@@ -136,7 +136,7 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
   **Safer imports and desktop builds.** Custom-      
   material imports now enforce a 25 MB per-file limit
   and report failures honestly. External desktop     
-  the desktop runtime has been upgraded to Electron  
+  the desktop runtime has been upgraded
   43.
 
  ## v1.3.0 — 2026-07-13
@@ -145,17 +145,17 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 **Water rendering, rebuilt from the ground up.** The old model had pinched, shallow-looking edges everywhere. Now there's a real depth model: one flat sea level per connected water body (computed via flood fill, not once for the whole map), with the seabed sinking beneath it the further out it goes — matches how a real coastline actually looks. Two unconnected ponds in the same area can sit at different heights, and water lines up correctly across chunk boundaries instead of stair-stepping.
 
-**Universal VTT export.** Maps now export as `.uvtt` files that drop straight into Foundry VTT's Universal Battlemap Importer or Roll20's UniversalVTTImporter — wall and line-of-sight data included. If you run tabletop games, your maps are playable the moment they're exported.
+**Universal VTT export.** Maps now export as `.uvtt` files for standard tabletop VTT importers — wall and line-of-sight data included. If you run tabletop games, your maps are playable the moment they're exported.
 
 **ISO and 3D views caught up to platformer.** Right-click any cell in ISO or 3D (via raycasting) to reseed its texture, swap between two active materials, or set a ramp — the same per-cell control platformer mode already had. Picks now persist through save/reload and layer switches, not just for the session.
 
-**A toolbar you can actually rearrange.** Drag-and-drop reordering, rebuilt on pointer events instead of native HTML5 drag-and-drop (which turns out to just never fire from a touch gesture on Android — so this was silently broken on-device despite working fine with a desktop mouse). Plus a real stash for anything you don't want cluttering the bar, and every toolbox action (randomize, generate water, clear map, save/load) is now a real moveable button instead of being stuck in a fixed dropdown.
+**A toolbar you can actually rearrange.** Drag-and-drop reordering, rebuilt on pointer events instead of native HTML5 drag-and-drop (which turns out to just never fire from a touch gesture on touch devices — so this was silently broken on-device despite working fine with a desktop mouse). Plus a real stash for anything you don't want cluttering the bar, and every toolbox action (randomize, generate water, clear map, save/load) is now a real moveable button instead of being stuck in a fixed dropdown.
 
-**A pass of bug fixes:** undo/redo now covers per-cell notes and properties, Clear Map actually resets everything it should, shift+right-click reliably opens the cell-notes popup on every autotile strategy instead of erasing the cell first, baking a chunk no longer silently drops its notes or texture picks, VTT export now derives wall data from every visible layer, pointy-top hex exports stopped reverting to flat-top metadata, and Aseprite import now respects hidden/translucent group layers.
+**A pass of bug fixes:** undo/redo now covers per-cell notes and properties, Clear Map actually resets everything it should, shift+right-click reliably opens the cell-notes popup on every autotile strategy instead of erasing the cell first, baking a chunk no longer silently drops its notes or texture picks, VTT export now derives wall data from every visible layer, pointy-top hex exports stopped reverting to flat-top metadata, and layered image import now respects hidden/translucent groups.
 
-**Smaller stuff that adds up:** per-cell notes and custom properties, shareable preset codes for a seed/variation/biome combo, Aseprite import alongside PNG/JPG/WEBP/GIF, a visual autotile rule-table editor, pointy-top hex as a second orientation, a Present mode for popping the map out to a second monitor, and an ASMR paint sound that's honestly pretty satisfying.
+**Smaller stuff that adds up:** per-cell notes and custom properties, shareable preset codes for a seed/variation/biome combo, layered image import alongside PNG/JPG/WEBP/GIF, a visual autotile rule-table editor, pointy-top hex as a second orientation, a Present mode for popping the map out to a second monitor, and an ASMR paint sound that's honestly pretty satisfying.
 
-**Also fixed:** a nasty 3D-paint bug where only the first stroke of a session rendered — every stroke after it stayed invisible until you paused painting (a debounce that kept cancelling itself under fast input, now a proper throttle). A precision bug that silently capped decal/puddle jitter to half its intended range. And a batch of smaller polish/performance fixes from a full codebase audit — icon consistency, export-file encoding cleanup, Android back-button handling, touch target sizing, smarter tile-cache eviction, and more.
+**Also fixed:** a nasty 3D-paint bug where only the first stroke of a session rendered — every stroke after it stayed invisible until you paused painting (a debounce that kept cancelling itself under fast input, now a proper throttle). A precision bug that silently capped decal/puddle jitter to half its intended range. And a batch of smaller polish/performance fixes from a full codebase audit — icon consistency, export-file encoding cleanup, mobile back-button handling, touch target sizing, smarter tile-cache eviction, and more.
 
 ---
 
@@ -179,7 +179,7 @@ Every hardcoded UI string wired through i18n, with Spanish added. Fixed paint-mo
 
 ## v1.0.10 — 2026-07-03
 
-Exponential map size steps, plus an Endless Map Discord bot. Dynamic UI/font scale resizing and native app-review prompts. Fixed broken GameMaker/Unity/Defold/Godot/LDtk exports and wired up real Google Play Billing. Fixed material color-parameter edits not affecting rendered output, and replaced flashing tooltip toasts with a dismissible, replayable popover.
+Exponential map size steps, plus an Endless Map community bot. Dynamic UI/font scale resizing and native app-review prompts. Fixed broken GameMaker/Unity/Defold/Godot/LDtk exports and wired up real in-app billing. Fixed material color-parameter edits not affecting rendered output, and replaced flashing tooltip toasts with a dismissible, replayable popover.
 
 ## 2026-06-24
 
@@ -187,7 +187,7 @@ Camera snap presets and dynamic water controls in the 3D view, plus 3D OBJ model
 
 ## v1.0.9 — 2026-06-17
 
-Fixed Android boot and settings issues for this release.
+Fixed mobile boot and settings issues for this release.
 
 ## v1.0.1 — 2026-06-17
 
@@ -199,4 +199,4 @@ All Tiled Up split off into its own project, growing out of an earlier prototype
 
 ---
 
-Questions, or want to try things out early? Come say hi on Discord.
+Questions, or want to try things out early? Come say hi in the community.
