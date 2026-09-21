@@ -4,8 +4,6 @@ Newest entries first.
 
 ## v1.9.0 — 2026-09-21 — Voxel is in, paint grew up, Pro is the door out
 
-**Compared to v1.6.0:** the July build still called voxel an experiment in the wings. It’s not. The sandbox shipped as a real block world you can live in, paint caught up hard, Pro finally means one clear thing, and Free on Android can earn a single export by watching an ad.
-
 **The voxel editor is no longer hiding.** Chunked world, hidden-face meshing, orbit camera, save slots, stamps, selection masks, copy/rotate/scale, inspect that closes the way it opens, water that actually flows (sources, falls, mist), fire with a lifetime plus Eternal / Pause / Stoke / Extinguish / Douse, explosions that throw micro-voxels, and dynamic bodies you can drag and that stop floating after Reset Map. Extrude an ISO map into voxel and the waterfall still looks like a waterfall. Texture resolution is a real control — 16 / 32 / 64 / 128. Phones get a GPU budget so first tool activation doesn’t hitch the whole session. Hardness holds and block light (0–15) made dig/build feel less like flat plastic.
 
 **Then the coast stopped looking like a prototype.** Dock planks, pilings, cleats, ladders, bait buckets, wells, barrels, signs, cottage framing, glowing windows, chimney smoke, mill vanes, clothesline, carts, beach fires, cave mouths, tide pools, crabs, fish, wakes, gulls, wet sand, foam — and a dinghy that finally sits on the water with a fisherman on the pier, not through it. West lighthouse with stairs and beam, walkable cliff caves, cliff waterfalls, teal water with waves. Props place as stamps, undo, and export at object scale. Under the hood: greedy meshing, packed micros, frozen shadow maps between edits, one lamp cluster light, skip work when the tab’s hidden, strip the wasteful mobile fill/fog path.
@@ -19,8 +17,6 @@ Newest entries first.
 **Free can still get one export on Android.** Hit an export gate and you choose: watch a short rewarded ad for a single successful download, or go Pro. The credit burns after that download. Ads never unlock voxel. Pro stays ad-free with unlimited exports and full voxel, **$4.99** one-time on Play. Privacy copy finally matches that — optional Free ads, Play/itch purchases, Pro has none — and your artwork still never leaves the device.
 
 **Desktop kept pace on itch.** Demo and Pro Windows builds are synced on the same product code again. The desktop package checks for updates on launch and from Settings and sends you to itch when there’s something newer; if you installed through the itch app, channel updates still roll in the usual way.
-
-**Build:** mobile release, versionCode 32, versionName 1.5.1.
 
 ## v1.6.0 — 2026-07-26
 
