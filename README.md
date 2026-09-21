@@ -4,65 +4,30 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
-## 2026-09-21 — Desktop 1.1.2 (itch Windows): Demo+Pro sync + update check
+## 2026-09-21 — Play update (first since July 26): voxel, paint, Pro gates, rewarded Free export
 
-**Windows / itch channel `windows`, version 1.1.2.**
+**Compared to v1.6.0 (2026-07-26):** this is the first Google Play upload since that build. Everything below is what players get now that was not in the July 26 store build — features, fixes, and product-boundary changes — without the intermediate GitHub notes that never shipped to Play.
 
-Demo and Pro Windows builds are synced again on the same product code. If you already own Pro, take the latest Windows build (or let the itch app update a channel install) so you’re not on a drifted older package.
+### Voxel is a real editor
+The voxel sandbox shipped as a first-class mode (not a hidden experiment): chunked storage and meshing, orbit camera, save slots, stamps, selection / copy / rotate / scale, inspect, water as a real liquid (sources, falls, mist), fire lifetime controls, explosions and micro-debris, and playable physics bodies you can place and reset. ISO maps can extrude into voxel with terrain bands; texture resolution is controllable; phones get a GPU budget so enter/remesh stays usable. Hardness/hold gating and block-light sampling landed for deeper dig/build feel. Coast/island work went far past a block prototype: pier, dinghy, fisherman, lighthouse, caves, waterfalls, micro-props at object scale, and a long performance pass (greedy meshing, packed micros, frozen shadows, fewer lights, pause when hidden).
 
-**Desktop update check.** On launch and from Settings, the desktop app checks a public version feed. When a newer build is available it opens the itch page so you can download there — there is no public unlocked binary CDN (that would bypass itch). If you installed via the **itch app**, channel updates for `windows` still apply through itch’s own updater.
+### Paint, maps, and 2.5D caught up
+Real 16-piece wall tilesets, per-cell deco, castle walls with optional doors, HD stamp palette, dockable HUD / rail stamps, and a phone HUD layout aimed at two-thumb use. Maps HUD docks to edges as one exclusive overlay instead of stacking nested popups. Mid-gesture zoom/pan no longer hammers React state every frame. Generate cave/dungeon wall·floor picks are respected. ISO adjust hit-testing accounts for elevation lift on decals. Blank-map fill, click-to-paint, Present Back, undo for water/path, per-chunk history, Generate overrides, and chunks in IndexedDB were hardened. Export empty-atlas and related P0 export bugs closed.
 
-Play / Android billing is unchanged; this package is the Pro itch desktop build.
+### Procedural materials and look-alikes
+Look-alike material twins were broken apart; bulkDefine palettes wired; lava/acid/oil/cobble retuned. Canvas cloth / bark / hemp architecture keys fixed; canvas sails, bark logs, and straw thatch render as themselves (not grass stand-ins). Dirt Path was removed as a dead/misleading material. Hex 64 and Iso Ground show in the format dropdown with every other format; stale PRO badges on free formats were scrubbed.
 
-itch: https://ploovius.itch.io/all-tiled-up
+### Pro boundary (exports + voxel)
+The editor — including formats, paint, and voxel editing — stays open on Free. **Pro is the door out:** every export path is gated (atlases, map/bucket JSON, detector packs, character downloads, procedural tile downloads, 3D/screenshots, voxel exports, and the rest of the audited set), and voxel entry itself is Pro-gated (tab, shortcut, saved voxel-mode restore). Free can still preview everything.
 
-## v1.9.0 — 2026-09-21 — Pro boundary and export hardening
+### Free export via rewarded ad (Android, this upload)
+On Android Free, an export deny offers **watch a rewarded ad for one successful download** or buy Pro. The credit is one-shot and clears after that export. Ads never unlock voxel. **Pro is ad-free** with unlimited exports and full voxel. Play Pro unlock is **$4.99** one-time (US). Privacy policy now discloses optional Free rewarded ads (AdMob), Play/itch purchases, and that Pro has no ads — artwork still stays on-device.
 
-**Compared to v1.8.0:** this is a release-integrity pass rather than another feature drop. The editor remains open to everyone; Pro is now consistently the door out.
+### Desktop / itch (same period)
+Windows itch builds were re-synced Demo↔Pro onto the same product code. Desktop **1.1.2** adds an itch-safe update check (launch + Settings) that opens the itch page when a newer build exists; installs via the itch app still update through itch’s channel updater.
 
-**Every export is protected.** Closed the remaining free-download paths across the app: stamp-atlas PNGs, 3D screenshots, map and bucket JSON, detector ZIPs and strips, character downloads, procedural atlas tiles, and every voxel export. Voxel entry itself is protected too, including the tab, shortcut, and a saved voxel-mode restore. Pro unlocks continue to open the complete export surface.
-
-**Formats are clearer.** All tileset formats are visible in the picker, including Hex 64 and Iso Ground, with stale PRO labels and obsolete Dirt Path references removed. Free users can still use every format and preview; only exports and voxel mode are gated.
-
-**Release hardening.** Restored the production stylesheet and build configuration after a broken cleanup, and added a full export audit documenting the 34 export kinds and their gate coverage.
-
-**Build:** mobile release bundle, versionCode 31, from `grokbranch`.
-
----
-
-## v1.8.0 — 2026-09-19 — Voxel coast & 2.5D walls
-
-**Compared to v1.7.0:** the voxel sandbox stopped looking like a block prototype and started looking like a real diorama you can actually live in and edit.
-
-**Micro-props at prop scale.** Dock planks, pilings, cleats, ladders, bait buckets, wells, barrels, signs, cottage framing, glowing windows, chimney smoke, mill vanes, clothesline, carts, beach fires, cave mouths with stalactites/chests/flicker lamps, tide pools, lily pads, crabs, fish, boat wakes, circling gulls, wet sand, shoreline foam, and a dinghy that finally sits on the water with a fisherman on the pier — not through it. Props place as stamps (undo / click-erase / drag-erase), persist with the map, and export at object scale. Engine export no longer nukes live meshes.
-
-**The island reads as a place.** West lighthouse with stairs and beam, walkable cliff caves, cliff waterfalls, teal water with waves, denser coast trees and shallows rocks, cobble lips on terrace drops, spinning mill smoke, ambient occlusion / sky / fill light. Poured water is an infinite source again; chimney fire stays in the chimney.
-
-**Paint / 2.5D caught up.** Real 16-piece wall tileset, per-cell deco, castle buildings with connecting walls, optional doors in wall gaps, stamps that stack on tiles, HD stamp palette, FAM tiles from cached seed-family variants, format dropdown + dockable HUD + rail stamps. Hover cursor no longer paints orange junk. Phone HUD got a two-thumb sequential tool layout.
-
-**Performance & crash guards.** Greedy top/bottom meshing and budgeted remesh on voxel enter, packed greedy micro mesher, typed-array flatten, frozen shadow maps between edits, one point light per lamp cluster, skip micro AO / pause when the tab is hidden, freeze static matrices, strip mobile fill/fog/hemi, and paint's material-tile cache so zoom/format reuse 256px tiles. White-screen / remesh / TransformControls / export crash paths hardened.
-
-**Also fixed:** light mode for chrome/canvas/settings; CanvasCloth/Bark/Hemp ARCH keys; mismatched procedural substrates + motion; canvas sails / bark logs / straw thatch (not grass); inspect sliders + deselect restored.
-
-**Builds:** browser demo (exports locked) + desktop package from the active branch.
-
----
-
-## v1.7.0 — 2026-09-14 — Voxel is in
-
-**The voxel editor is no longer a hidden experiment.** It ships as a first-class block world you can paint, simulate, and (on Pro) export. 64×32×64 bounds, chunked meshing with hidden-face culling, orbit camera, four save slots, stamps, selection masks, copy/rotate/scale/randomize, a command palette, and inspect popups that close the same way they open. Deselecting is as easy as selecting. Right-click inspect no longer opens the browser context menu, and a camera drag no longer counts as an inspect.
-
-**Water is a real liquid, not a pile of blue cubes.** Infinite sources keep feeding. Water falls off ledges as a continuous waterfall sheet instead of dripping rectangles. Gravity first, then lateral spread. Drop something in and you get mist. Fire has a real lifetime plus Eternal / Pause / Stoke / Extinguish / Douse. Explosions throw micro-voxels. Dynamic rigid bodies can be selected, dragged, placed, copied, and actually stop floating after Reset Map.
-
-**Paint ISO and voxel talk to each other.** Terrain Bands assign a texture per height; isometric tiles use those textures on tops and stacked cliff slices. Extrude an ISO map into voxel and the waterfall still looks like a waterfall. Band lists scroll. The paint HUD no longer stacks the toolbar, terrain panel, inspector, and hotbar on top of each other. Optional Basic UI names every tool; Experienced stays icon-only.
-
-**Voxel texture resolution is a real control** — 16 / 32 / 64 / 128. Grid visibility is a toggle, not a guess. Phones get a GPU budget (lower pixel ratio, fewer grass blades, coalesced remesh) so the editor stays playable instead of hitching on first tool activation.
-
-**What stays gated:** exports. The editor — including voxel, ISO, fire, water, and physics — is the full tool. Pro is the door out: engine-ready files, atlases, and packs. The browser build is the demo (exports locked). The desktop and mobile packages are the paid builds.
-
-**Also in this drop:** ISO chunks no longer clip tall stacks; stamps actually place; before/after compare can be dismissed; Dev HUD toggles off.
-
----
+### Build
+Android Play upload: versionName **1.5.1**, versionCode **32**, from current `main` (rewarded-ad export + production AdMob). First Play store package since the July 26 line.
 
 ## v1.6.0 — 2026-07-26
 
