@@ -1,33 +1,26 @@
-# All Tiled Up — Devlog
-
-Development log for All Tiled Up, a procedural tileset generator and map painter for game devs (and tabletop VTT map makers). Newest entries first.
+Newest entries first.
 
 ---
 
-## 2026-09-21 — Play update (first since July 26): voxel, paint, Pro gates, rewarded Free export
+## v1.9.0 — 2026-09-21 — Voxel is in, paint grew up, Pro is the door out
 
-**Compared to v1.6.0 (2026-07-26):** this is the first Google Play upload since that build. Everything below is what players get now that was not in the July 26 store build — features, fixes, and product-boundary changes — without the intermediate GitHub notes that never shipped to Play.
+**Compared to v1.6.0:** the July build still called voxel an experiment in the wings. It’s not. The sandbox shipped as a real block world you can live in, paint caught up hard, Pro finally means one clear thing, and Free on Android can earn a single export by watching an ad.
 
-### Voxel is a real editor
-The voxel sandbox shipped as a first-class mode (not a hidden experiment): chunked storage and meshing, orbit camera, save slots, stamps, selection / copy / rotate / scale, inspect, water as a real liquid (sources, falls, mist), fire lifetime controls, explosions and micro-debris, and playable physics bodies you can place and reset. ISO maps can extrude into voxel with terrain bands; texture resolution is controllable; phones get a GPU budget so enter/remesh stays usable. Hardness/hold gating and block-light sampling landed for deeper dig/build feel. Coast/island work went far past a block prototype: pier, dinghy, fisherman, lighthouse, caves, waterfalls, micro-props at object scale, and a long performance pass (greedy meshing, packed micros, frozen shadows, fewer lights, pause when hidden).
+**The voxel editor is no longer hiding.** Chunked world, hidden-face meshing, orbit camera, save slots, stamps, selection masks, copy/rotate/scale, inspect that closes the way it opens, water that actually flows (sources, falls, mist), fire with a lifetime plus Eternal / Pause / Stoke / Extinguish / Douse, explosions that throw micro-voxels, and dynamic bodies you can drag and that stop floating after Reset Map. Extrude an ISO map into voxel and the waterfall still looks like a waterfall. Texture resolution is a real control — 16 / 32 / 64 / 128. Phones get a GPU budget so first tool activation doesn’t hitch the whole session. Hardness holds and block light (0–15) made dig/build feel less like flat plastic.
 
-### Paint, maps, and 2.5D caught up
-Real 16-piece wall tilesets, per-cell deco, castle walls with optional doors, HD stamp palette, dockable HUD / rail stamps, and a phone HUD layout aimed at two-thumb use. Maps HUD docks to edges as one exclusive overlay instead of stacking nested popups. Mid-gesture zoom/pan no longer hammers React state every frame. Generate cave/dungeon wall·floor picks are respected. ISO adjust hit-testing accounts for elevation lift on decals. Blank-map fill, click-to-paint, Present Back, undo for water/path, per-chunk history, Generate overrides, and chunks in IndexedDB were hardened. Export empty-atlas and related P0 export bugs closed.
+**Then the coast stopped looking like a prototype.** Dock planks, pilings, cleats, ladders, bait buckets, wells, barrels, signs, cottage framing, glowing windows, chimney smoke, mill vanes, clothesline, carts, beach fires, cave mouths, tide pools, crabs, fish, wakes, gulls, wet sand, foam — and a dinghy that finally sits on the water with a fisherman on the pier, not through it. West lighthouse with stairs and beam, walkable cliff caves, cliff waterfalls, teal water with waves. Props place as stamps, undo, and export at object scale. Under the hood: greedy meshing, packed micros, frozen shadow maps between edits, one lamp cluster light, skip work when the tab’s hidden, strip the wasteful mobile fill/fog path.
 
-### Procedural materials and look-alikes
-Look-alike material twins were broken apart; bulkDefine palettes wired; lava/acid/oil/cobble retuned. Canvas cloth / bark / hemp architecture keys fixed; canvas sails, bark logs, and straw thatch render as themselves (not grass stand-ins). Dirt Path was removed as a dead/misleading material. Hex 64 and Iso Ground show in the format dropdown with every other format; stale PRO badges on free formats were scrubbed.
+**Paint and 2.5D actually grew into the tool.** Real 16-piece wall tilesets, per-cell deco, castle buildings with connecting walls, optional doors in wall gaps, HD stamp palette, stamps that stack on tiles, format dropdown + dockable HUD + rail stamps. Phone HUD got a two-thumb layout. Maps HUD docks to the edges as one exclusive sheet instead of nesting popups on top of each other. Zoom and pan mid-gesture stop fighting the UI. Generate’s cave/dungeon wall and floor picks are obeyed. ISO adjust hits the raised face you meant. Undo covers water and path the way you’d expect; chunks remember history; Generate overrides stop lying; empty atlas exports don’t ship blank files anymore.
 
-### Pro boundary (exports + voxel)
-The editor — including formats, paint, and voxel editing — stays open on Free. **Pro is the door out:** every export path is gated (atlases, map/bucket JSON, detector packs, character downloads, procedural tile downloads, 3D/screenshots, voxel exports, and the rest of the audited set), and voxel entry itself is Pro-gated (tab, shortcut, saved voxel-mode restore). Free can still preview everything.
+**Materials stopped cloning each other.** Look-alike twins got real structural signatures again. Canvas cloth, bark, and hemp use the right architecture keys. Canvas sails, bark logs, and straw thatch read as themselves — not grass wearing a costume. Dirt Path is gone. Hex 64 and Iso Ground show up in the format list with everyone else, and the leftover PRO badges on free formats were scrubbed so the picker matches what Free can actually use.
 
-### Free export via rewarded ad (Android, this upload)
-On Android Free, an export deny offers **watch a rewarded ad for one successful download** or buy Pro. The credit is one-shot and clears after that export. Ads never unlock voxel. **Pro is ad-free** with unlimited exports and full voxel. Play Pro unlock is **$4.99** one-time (US). Privacy policy now discloses optional Free rewarded ads (AdMob), Play/itch purchases, and that Pro has no ads — artwork still stays on-device.
+**Pro is the door out — not a second editor.** Free keeps the full editor: every format, paint, preview, the works. Pro unlocks exports and voxel — atlases, map and bucket JSON, detector packs, character downloads, procedural tiles, 3D screenshots, every voxel export, plus voxel entry itself (tab, shortcut, saved restore). That boundary is closed end-to-end now; the free download leaks are gone.
 
-### Desktop / itch (same period)
-Windows itch builds were re-synced Demo↔Pro onto the same product code. Desktop **1.1.2** adds an itch-safe update check (launch + Settings) that opens the itch page when a newer build exists; installs via the itch app still update through itch’s channel updater.
+**Free can still get one export on Android.** Hit an export gate and you choose: watch a short rewarded ad for a single successful download, or go Pro. The credit burns after that download. Ads never unlock voxel. Pro stays ad-free with unlimited exports and full voxel, **$4.99** one-time on Play. Privacy copy finally matches that — optional Free ads, Play/itch purchases, Pro has none — and your artwork still never leaves the device.
 
-### Build
-Android Play upload: versionName **1.5.1**, versionCode **32**, from current `main` (rewarded-ad export + production AdMob). First Play store package since the July 26 line.
+**Desktop kept pace on itch.** Demo and Pro Windows builds are synced on the same product code again. The desktop package checks for updates on launch and from Settings and sends you to itch when there’s something newer; if you installed through the itch app, channel updates still roll in the usual way.
+
+**Build:** mobile release, versionCode 32, versionName 1.5.1.
 
 ## v1.6.0 — 2026-07-26
 
