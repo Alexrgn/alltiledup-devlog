@@ -4,6 +4,20 @@ Development log for All Tiled Up, a procedural tileset generator and map painter
 
 ---
 
+## v1.9.0 — 2026-09-21 — Pro boundary and export hardening
+
+**Compared to v1.8.0:** this is a release-integrity pass rather than another feature drop. The editor remains open to everyone; Pro is now consistently the door out.
+
+**Every export is protected.** Closed the remaining free-download paths across the app: stamp-atlas PNGs, 3D screenshots, map and bucket JSON, detector ZIPs and strips, character downloads, procedural atlas tiles, and every voxel export. Voxel entry itself is protected too, including the tab, shortcut, and a saved voxel-mode restore. Pro unlocks continue to open the complete export surface.
+
+**Formats are clearer.** All tileset formats are visible in the picker, including Hex 64 and Iso Ground, with stale PRO labels and obsolete Dirt Path references removed. Free users can still use every format and preview; only exports and voxel mode are gated.
+
+**Release hardening.** Restored the production stylesheet/Vite configuration after a broken build-tail cleanup, and added a full export audit documenting the 34 export kinds and their gate coverage.
+
+**Build:** Android Play release bundle, versionCode 31, from `grokbranch`.
+
+---
+
 ## v1.8.0 — 2026-09-19 — Voxel coast & 2.5D walls
 
 **Compared to v1.7.0:** the voxel sandbox stopped looking like a block prototype and started looking like a real diorama you can actually live in and edit.
