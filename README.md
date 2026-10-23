@@ -2,6 +2,97 @@ Newest entries first.
 
 ---
 
+## 2026-10-23 — Material B paints again, plus atlas and export fixes
+
+[Published on itch.io](https://ploovius.itch.io/all-tiled-up/devlog/1724403/material-b-paints-again-plus-atlas-and-export-fixes)
+
+Material B was erasing terrain instead of painting the background. That’s fixed in this update, along with several problems in the material controls, atlas preview and exports.
+
+### Material B stays a background
+
+Explicit Material B paint keeps its background role through painting, Undo/Redo, saving and stamp paste. Pasting a stamp keeps that background separate from solid terrain.
+
+Supported native-map exports carry it as a separate, non-colliding layer. Hex and three-quarter exports stop with a warning when they can’t preserve that background, rather than quietly dropping it.
+
+### Material controls do what they say
+
+The affected Warp Frequency and kernel controls now actually affect the texture. Invalid numbers no longer get accepted as material settings, saved session values are kept, and a seed of zero works as a real seed.
+
+Some BlackHole and Pumice textures will look different with the same settings because Warp Frequency was previously being ignored.
+
+### Atlas and export fixes
+
+Imported atlases now export the selected artwork. Pixel edits and custom-art changes no longer leave you looking at an old version, and an older generation job can’t replace newer atlas edits.
+
+Tile-edge masks were corrected where the preview and export disagreed. Ordinary Wang and Blob maps exported to Tiled also keep their transparent foreground shapes instead of having the gaps filled by an unwanted full tile underneath.
+
+Supported single-terrain layers can now rebuild their previews from saved map data without you having to visit each layer first. If a visible layer still can’t be rebuilt, composite exports stop and name it instead of silently leaving it out.
+
+### Also fixed
+
+- Voxel water placement, draining and inspection use the same rules for which cell you’re targeting.
+- Demo and Pro upgrade messages show **$4.99**, correcting the old $9.99 text. This isn’t a price increase or a new charge.
+
+### Builds on this page
+
+- Browser demo updated: the 2D editor is free; exports and Voxel stay locked.
+- Windows Pro zip updated: exports and Voxel unlocked.
+
+---
+
+## 2026-10-22 — Platformer scenery, editable LDtk maps, and better room tools
+
+[Published on itch.io](https://ploovius.itch.io/all-tiled-up/devlog/1721989/platformer-scenery-editable-ldtk-maps-and-better-room-tools)
+
+Since the September update: more control over the level around your tiles, better tools for building rooms, and an LDtk workflow that can bring your edits back.
+
+### Platformer has more to play with
+
+Coins, checkpoints, goals, springs, conveyors, and doors that stay locked until you've collected enough coins. These work in test-play, alongside the moving platforms and breakable blocks that were already there. Lamps and spotlights give you a night preview with light falling on the level.
+
+You can also use your own player artwork: import a sprite sheet, assign the animation frames, and line up the feet in the preview. The appearance saves with the project without changing the player's collision.
+
+### Parallax got its own scenery
+
+Imported backdrops still work. Alongside them, you can now generate layered forests, caverns, ruins, snowy passes, and industrial scenery, with foreground layers in front of the terrain and player. Each layer has its own depth, tint, opacity, and seed, so you can adjust the scene instead of starting again with another image.
+
+Backdrop edits now participate in Undo/Redo, and the controls leave the artwork visible while you're adjusting it, including on a phone.
+
+### LDtk edits can come back
+
+Platformer export now packages native LDtk tile layers, collision, and entities with the authored artwork. Edit the supported terrain, collision, entity settings, or layer visibility/order/opacity in LDtk, then bring the package back into All Tiled Up.
+
+You get a review before anything changes. Conflicts and unsupported edits are called out rather than silently replacing your work; accepted changes apply together and can be undone. This uses the exported tiles and their matching collision values, not arbitrary replacement assets.
+
+### Rooms are easier to build and revise
+
+2.5D walls gained room-outline and straight-run tools, authored door/window openings, per-run wall materials, and floor materials for individual enclosed regions. Supported wall runs can be moved, extended, or shortened with a preview before applying the change.
+
+Connected wall chunks now work as a larger editable world, with custom rectangular map sizes and whole-world project saves. You don't have to save each chunk as a separate project to carry the layout with you.
+
+### Materials and voxel detail
+
+Another material identity pass: woven canvas reads as cloth, bark has directional grain, obsidian has quieter glass fractures, and vein materials form connected networks. Grass, ice, masonry, metal, and several animated surfaces also got attention, including controls that weren't affecting the result they claimed to.
+
+Voxel Place and Erase now offer standard, quarter-meter, and sixteenth-meter grids. Water and foliage got a visual cleanup, and GLB export fixes keep off-camera geometry and parent transforms intact. Voxel archives also include their palette catalog.
+
+### Also fixed
+
+- The Paint toolbar no longer gets tucked behind the header at larger UI or font sizes.
+- Generated Platformer tiles can be repainted and erased properly, including cells with slope or one-way overrides.
+- Switching formats no longer leaves stale Platformer backgrounds and layer previews over the next view. Your saved layer data is kept.
+- CHECK START closes with its × button or Escape, and no longer hangs over test-play.
+- Tooltips are off by default and only appear when you turn them on.
+- Material previews refresh when their settings change; older generation requests can't overwrite a newer result.
+- Switching tools clears competing paint/stamp/entity modes, and Hex orientation changes are guarded against reinterpreting existing roads and rivers.
+
+### Builds on this page
+
+- Browser demo updated: the 2D editor is free; exports and Voxel stay locked.
+- Windows Pro zip updated: exports and Voxel unlocked.
+
+---
+
 ## v1.9.0 — 2026-09-21 — Voxel, paint depth, and Pro that means something
 
 **Voxel is a real block world.** Chunked storage and meshing, orbit camera, save slots, stamps, selection masks, copy / rotate / scale, and inspect that opens and closes cleanly. Water behaves like a liquid — sources, falls, mist. Fire has a lifetime with Eternal / Pause / Stoke / Extinguish / Douse. Explosions throw micro-voxels. Dynamic bodies can be placed, dragged, and reset with the map. ISO maps extrude into voxel with terrain bands that keep their textures. Texture resolution is a control — 16 / 32 / 64 / 128. Phones run on a GPU budget so the mode stays playable. Hardness holds and block light (0–15) give dig and build real weight.
