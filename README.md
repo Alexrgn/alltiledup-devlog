@@ -2,6 +2,42 @@ Newest entries first.
 
 ---
 
+## 2026-10-24 — Dual terrain shapes, Corner exports and clearer paint status
+
+[Published on itch.io](https://ploovius.itch.io/all-tiled-up/devlog/1725577/dual-terrain-shapes-corner-exports-and-clearer-paint-status)
+
+Dual tiles weren’t keeping their intended shape. Corners could face the wrong way, and areas that should have been transparent were being filled. This update fixes those shapes, their placement in multi-terrain maps, and how Corner and Dual maps leave the editor.
+
+### Dual tiles keep their shape
+
+Dual terrain now uses the correct corner orientation, with rounded transitions that meet along shared edges. With no Material B selected, the space outside the terrain stays transparent instead of getting a solid black background.
+
+Multi-terrain Dual maps also place those shapes correctly in the Paint view and PNG exports, including the partial tiles along map edges. Painted materials follow the same placement rather than falling back to ordinary square tiles.
+
+### Corner and Dual exports keep the visible edges
+
+Native Tiled exports now preserve the foreground shapes in ordinary single-terrain Corner and Dual maps. Edges that extend into an empty cell stay visible without turning that cell into solid terrain. Explicit Material B stays on its own non-colliding background layer.
+
+This correction applies to those maps at full layer opacity. For translucent layers, use PNG; native export stops with a message rather than producing a misleading result.
+
+### Paint shows the material you’re using
+
+The material label now follows the selected paint action instead of continuing to show Material A when you’re painting with B. It also follows the active material in multi-terrain and free-paint modes.
+
+When you’re erasing, placing stamps or using a tool that doesn’t paint a material, the label no longer claims you’re painting one.
+
+### Also fixed
+
+- Copy tile (PNG) follows the same export access rules as other PNG exports, including valid export credits.
+- A failed clipboard copy doesn’t spend an export credit.
+
+### Builds on this page
+
+- Browser demo updated: the 2D editor is free; exports and Voxel stay locked.
+- Windows Pro zip updated: exports and Voxel unlocked.
+
+---
+
 ## 2026-10-23 — Material B paints again, plus atlas and export fixes
 
 [Published on itch.io](https://ploovius.itch.io/all-tiled-up/devlog/1724403/material-b-paints-again-plus-atlas-and-export-fixes)
